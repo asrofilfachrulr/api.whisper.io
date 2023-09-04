@@ -38,7 +38,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/whisper.io:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_TAG }}
 
   deploy-to-vm:
     needs: build-and-push-docker-image
