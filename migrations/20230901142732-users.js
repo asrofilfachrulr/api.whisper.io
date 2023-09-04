@@ -16,11 +16,15 @@ exports.setup = function(options, seedLink) {
 
 exports.up = async function(db) {
   await db.runSql(`CREATE TABLE IF NOT EXISTS users (
-      id varchar(255) primary key not null,
-      email varchar(255) not null unique,
-      full_name varchar(255) not null,
-      password varchar(255) not null);
-    `)
+    id varchar(255) primary key not null,
+    email varchar(255) not null unique,
+    full_name varchar(255) not null,
+    password varchar(255) not null);
+  `);
+
+  await db.runSql(`INSERT INTO users VALUES('@id_admin', 'admin@whisper.io', 'admin admin', 'admin');
+  `);
+
 };
 
 exports.down = async function(db) {

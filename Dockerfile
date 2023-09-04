@@ -18,7 +18,5 @@ EXPOSE 8080
 
 RUN npm install -g db-migrate
 
-RUN db-migrate up
-
 # Define the command to start your Express.js application
 CMD ["npm", "start"]
