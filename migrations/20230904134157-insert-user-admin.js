@@ -15,7 +15,7 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = async function(db) {
-  await db.runSql(`INSERT INTO users VALUES('@id_admin', 'admin@whisper.io', 'admin admin', 'admin');`);
+  await db.runSql(`INSERT INTO users VALUES('@id_admin', 'admin@whisper.io', 'user admin', '$2b$10$1B0fCCTrnVx..yu1MiDSxeVzOJGOY7.1Q02MO2EVQ91R0nlYtL7nu');`);
 };
 
 exports.down = async function(db) {
