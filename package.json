@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "migrate-up": "db-migrate up -v -c 999",
+    "migrate-down": "db-migrate down -v -c 999",
+    "migrate-create": "db-migrate create"
   },
   "keywords": [],
   "author": "",
@@ -19,5 +23,8 @@
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.6.0",
     "nanoid": "^3.3.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
   }
 }

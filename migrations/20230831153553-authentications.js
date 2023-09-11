@@ -14,12 +14,17 @@ exports.setup = function(options, seedLink) {
   seed = seedLink;
 };
 
-exports.up = async function(db) {
-  await db.runSql('CREATE TABLE IF NOT EXISTS authentications (token varchar(255) not null);')
+exports.up = function(db) {
+  return db.createTable('authentications', {
+    token: {
+      type: 'varchar(255)',
+      notNull: true
+    }
+  })
 };
 
-exports.down = async function(db) {
-  await db.runSql('DROP TABLE IF EXISTS authentications;');
+exports.down = function(db) {
+  return db.dropTable('authentications')
 };
 
 exports._meta = {
