@@ -11,6 +11,11 @@ module.exports = (http) => {
     socket.on("userId", (id) => {
       console.log(`user ${id} joined`)
     })
+
+    socket.on("send-message", (obj) => {
+      console.log(obj)
+      io.emit('receive-message', obj)
+    })
   })
 }
 
