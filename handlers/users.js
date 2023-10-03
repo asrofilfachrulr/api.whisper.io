@@ -26,9 +26,10 @@ function getUserHandler(pool) {
 function getPublicUserHandler(pool) {
   return async (req, res) => {
     try {
-      const [rows, _] = await pool.query(`SELECT users.username, users.full_name, 
+      const conditionalQuery = req.params.identifier.includes('@') ? 'users.id' : 'users.username'
+      const [rows, _] = await pool.query(`SELECT users.id, users.username, users.full_name, 
       users.country, users.gender, users.birth_year, users.bio
-      FROM users WHERE users.id = ?`, [req.params.id])
+      FROM users WHERE ${conditionalQuery} = ?`, [req.params.identifier])
       if(rows.length > 0) {
         const row = rows[0]
         res.json({user: row})

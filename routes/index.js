@@ -14,7 +14,7 @@ const auth = require('../handlers/auth')
 router.post("/register", users.postNewUserHandler(pool))
 router.post("/login", auth.postLoginHandler(pool))
 
-router.get('/user/public/:id', users.getPublicUserHandler(pool))
+router.get('/user/public/:identifier', users.getPublicUserHandler(pool))
 
 // protected routes
 router.get("/user", jwtMiddleware, users.getUserHandler(pool))
