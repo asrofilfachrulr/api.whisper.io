@@ -8,7 +8,7 @@ function postLoginHandler(pool) {
     const {identifier, password} = req.body
     try {
       const typeIndentifier = identifier.indexOf('@') === -1 ? 'u.username' : 'c.email'
-      const prepQuery = `SELECT u.id, u.username, c.email, c.password FROM user_bio u JOIN credentials c ON u.id = c.user_id  WHERE ${typeIndentifier} = ?`
+      const prepQuery = `SELECT u.id, u.username, c.email, c.password FROM users u JOIN credentials c ON u.id = c.user_id  WHERE ${typeIndentifier} = ?`
       const [rows, _] = await pool.query(prepQuery, [identifier])
       if(rows.length > 0){
         const row = rows[0]
