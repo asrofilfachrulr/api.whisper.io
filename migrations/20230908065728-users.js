@@ -15,7 +15,7 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = function(db) {
-  return db.createTable('user_bio',{
+  return db.createTable('users',{
     id: {
       type: 'varchar(255)',
       primaryKey: true,
@@ -31,25 +31,25 @@ exports.up = function(db) {
     },
     country: {
       type: 'varchar(255)',
-      defaultValue: 'USA'
+      defaultValue: 'U.S.A'
     },
     gender: {
       type: 'varchar(10)',
-      defaultValue: 'male'
+      defaultValue: 'Male'
     },
     birth_year: {
       type: 'int',
-      notNull: true,
+      defaultValue: 1970,
     },
     bio: {
       type: 'varchar(255)',
-      notNull: false
+      defaultValue: ''
     }
   })
 };
 
 exports.down = function(db) {
-  return db.dropTable('user_bio');
+  return db.dropTable('users');
 };
 
 exports._meta = {

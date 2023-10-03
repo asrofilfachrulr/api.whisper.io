@@ -16,7 +16,7 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = function(db) {
-  return db.insert('user_bio', 
+  return db.insert('users', 
   ['id', 'username', 'full_name', 'birth_year'],
   ['@id_admin00', 'admin', 'admin whisper.io', 1999])
   .then(async function(result){
@@ -29,7 +29,7 @@ exports.up = function(db) {
 };
 
 exports.down = function(db) {
-  return db.runSql('DELETE FROM user_bio WHERE id = @id_admin00;');
+  return db.runSql('DELETE FROM users WHERE id = @id_admin00;');
 };
 
 exports._meta = {

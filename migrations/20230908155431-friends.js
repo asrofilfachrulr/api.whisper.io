@@ -27,7 +27,7 @@ exports.up = function(db) {
       notNull: true,
       foreignKey: {
         name: 'friends_1-users_id_fk',
-        table: 'user_bio',
+        table: 'users',
         rules: {
           onDelete: 'CASCADE',
         },
@@ -38,8 +38,8 @@ exports.up = function(db) {
       type: 'varchar(255)',
       notNull: true,
       foreignKey: {
-        name: 'friends_1-users_id_fk',
-        table: 'user_bio',
+        name: 'friends_2-users_id_fk',
+        table: 'users',
         rules: {
           onDelete: 'CASCADE',
         },
@@ -47,7 +47,7 @@ exports.up = function(db) {
       }
     },
   }).then(function(result){
-    db.runSql('ALTER TABLE friends ADD CONSTRAINT unique_friend_id-user_id UNIQUE (user_id_1, user_id_2);')
+    db.runSql('ALTER TABLE friends ADD CONSTRAINT unique_friendship UNIQUE (`user_id_1`, `user_id_2`);')
   }, function(error){
     return
   })

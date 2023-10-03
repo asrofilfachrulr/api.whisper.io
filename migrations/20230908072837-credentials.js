@@ -20,8 +20,8 @@ exports.up = function(db) {
       type: 'varchar(255)',
       notNull: true,
       foreignKey: {
-        name: 'user_bio-users_id_fk',
-        table: 'user_bio',
+        name: 'users_id-credentials_user_id_fk',
+        table: 'users',
         rules: {
           onDelete: 'CASCADE',
         },

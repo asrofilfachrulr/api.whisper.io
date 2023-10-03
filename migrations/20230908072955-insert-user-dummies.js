@@ -17,7 +17,7 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = function(db) {
-  return db.runSql(`INSERT INTO user_bio VALUES 
+  return db.runSql(`INSERT INTO users VALUES 
   ('@id_dummy01', 'anya', 'Anya Sebastian', 'Spain', 'male', 1999, 'Dont look down on me because im small'),
   ('@id_dummy02', 'fachri', 'Joao Fachri', 'Portugal', 'male', 2002, 'This land is a holy land'),
   ('@id_dummy03', 'john', 'John Lao', 'Vietnam', 'male', 1994, 'Geurilla-tizen'),
@@ -42,12 +42,12 @@ exports.up = function(db) {
     `)
   }, function(error) {
     console.log(error);
-    db.runSql(`DELETE FROM user_bio WHERE id LIKE '@id_dummy%';`)
+    db.runSql(`DELETE FROM users WHERE id LIKE '@id_dummy%';`)
   })
 };
 
 exports.down = async function(db) {
-  await db.runSql(`DELETE FROM user_bio WHERE id LIKE '@id_dummy%';`);
+  await db.runSql(`DELETE FROM users WHERE id LIKE '@id_dummy%';`);
 };
 
 exports._meta = {
