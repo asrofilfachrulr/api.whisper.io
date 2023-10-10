@@ -15,16 +15,12 @@ exports.setup = function(options, seedLink) {
 };
 
 exports.up = function(db) {
-  return db.createTable('authentications', {
-    token: {
-      type: 'varchar(255)',
-      notNull: true
-    }
-  })
+  return db.runSql(`INSERT INTO chats VALUES
+  ('@chat_dummy01', '@id_dummy01', '@id_dummy03');`);
 };
 
 exports.down = function(db) {
-  return db.dropTable('authentications')
+  return db.runSql(`DELETE FROM friends WHERE user_id_1 = '@id_admin00'`);
 };
 
 exports._meta = {

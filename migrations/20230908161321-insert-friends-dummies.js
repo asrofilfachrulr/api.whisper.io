@@ -16,19 +16,18 @@ exports.setup = function(options, seedLink) {
 
 exports.up = function(db) {
   return db.runSql(`INSERT INTO friends VALUES
-  ('1', '@id_admin00', '@id_dummy01'),
-  ('2', '@id_admin00', '@id_dummy02'),
-  ('3', '@id_admin00', '@id_dummy03'),
-  ('4', '@id_admin00', '@id_dummy04'),
-  ('5', '@id_admin00', '@id_dummy05'),
-  ('6', '@id_admin00', '@id_dummy06'),
-  ('7', '@id_admin00', '@id_dummy07'),
-  ('8', '@id_admin00', '@id_dummy08'),
-  ('9', '@id_admin00', '@id_dummy09');`);
+  ('2', '@id_dummy01', '@id_dummy02'),
+  ('3', '@id_dummy03', '@id_dummy01'),
+  ('4', '@id_dummy01', '@id_dummy04'),
+  ('5', '@id_dummy05', '@id_dummy01'),
+  ('6', '@id_dummy01', '@id_dummy06'),
+  ('7', '@id_dummy01', '@id_dummy07'),
+  ('8', '@id_dummy08', '@id_dummy01'),
+  ('9', '@id_dummy01', '@id_dummy09');`);
 };
 
 exports.down = function(db) {
-  return db.runSql(`DELETE FROM friends WHERE user_id_1 = '@id_admin00'`);
+  return db.runSql(`DELETE FROM friends WHERE user_id_1 = '@id_dummy01'`);
 };
 
 exports._meta = {

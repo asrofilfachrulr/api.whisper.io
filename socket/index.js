@@ -1,3 +1,5 @@
+const pool = require('../config/dbConfig');
+
 module.exports = (http) => {
   const io = require("socket.io")(http, {
     cors: "*"
