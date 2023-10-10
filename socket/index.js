@@ -29,21 +29,35 @@ module.exports = (http) => {
       console.log("[ON: register-id] update connectedUsers: ", connectedUsers)
     })
 
-    socket.on("send-message", (data, callback) => {
+    socket.on("send-message", async (data, callback) => {
       console.log("[ON: send-message] data:", data)
 
-      if (connectedUsers.hasOwnProperty(data.recepient)) {
-        const targetSocketId = connectedUsers[data.recepient]
+      const {messageId, chatId, sender, recepient, content, time } = data
+      const datetimeAdapter = (d) => d.slice(0, 19).replace('T', ' ')
+      
+      try {
+        const [result, _] = await pool.query("INSERT INTO messages VALUES(?, ?, ?, ?, ?, ?, ?)", [messageId, chatId, sender, content, datetimeAdapter(time), true, true])
+        if(result.affectedRows === 0) {
+          throw "Server error: failed to creating new message"
+        } 
+      } catch (e) {
+        console.log(e)
+        callback({status: false, message: e})
+        return
+      }
+      
+      callback({ status: true })
+      
+      if (connectedUsers.hasOwnProperty(recepient)) {
+        const targetSocketId = connectedUsers[recepient]
 
         socket.to(targetSocketId).emit("receive-message", {
-          // socket.emit("receive-message", {
-          content: data.content,
-          sender: data.sender,
-          time: data.time
+          content,
+          sender,
+          time,
+          messageId,
+          chatId
         })
-        callback({ status: true })
-      } else {
-        callback({ status: false })
       }
     })
   })

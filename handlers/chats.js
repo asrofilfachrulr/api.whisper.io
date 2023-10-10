@@ -9,8 +9,13 @@ function getChats(pool){
       SELECT * FROM chats WHERE participant_1 = ? OR participant_2 = ?;
       `, [userId, userId])
       if(rows.length > 0) {
+        const chats = rows.map(row => ({
+          id: row.id,
+          participants: [row.participant_1, row.participant_2],
+          messages: []
+        }))
         res.json({
-            chats: rows
+            chats
         })
       } else {
         res.json({
@@ -69,7 +74,11 @@ function postNewChat(pool){
             .json({message: "fail to create chat"})
         } else {
           res.status(201)
-            .json({message: "chat created"})
+            .json({message: "chat created", chat: {
+              id: chatId,
+              participants: [userId, participantId],
+              messages: [] 
+            }})
         }   
       }
     } catch(e){

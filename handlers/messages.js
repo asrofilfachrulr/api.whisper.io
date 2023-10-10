@@ -4,7 +4,7 @@ const respErr = require("../responses/error")
 function getMessagesByChatId(pool){
   return async(req, res) => {
     const {userId} = req.user
-    const {chatId} = req.body
+    const {chatId} = req.query
 
     try {
       const [rows, _] = await pool.query('SELECT * FROM chats WHERE (id = ? AND participant_1 = ?) OR (id = ? AND participant_2 = ?)', [chatId, userId, chatId, userId])
