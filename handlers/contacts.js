@@ -62,7 +62,7 @@ function postNewContact(pool){
     try {
       const [rows,_] = await pool.query("SELECT * from friends WHERE (`user_id_1` = ? AND `user_id_2` = ?) OR (`user_id_1` = ? AND `user_id_2` = ?)", [userId, targetId, targetId, userId])
       if(rows.length > 0){
-        res.status(400)
+        res.status(409)
         .json({message: "relationship already exist"})
       } else {
         const [result, _] = await pool.query("INSERT INTO friends (`user_id_1`, `user_id_2`) VALUES(?, ?)", [userId, targetId])
